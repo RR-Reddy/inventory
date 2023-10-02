@@ -26,9 +26,10 @@ class AuthProvider extends ChangeNotifier {
         authService.authStateChanges().listen(_listenAuthStateChanges);
   }
 
-  void _listenAuthStateChanges(User? user) {
+  void _listenAuthStateChanges(User? user)async {
     _user = user;
     if (user == null) {
+      await Future.delayed(const Duration(seconds: 1));
       navService.nav.pushNamedAndRemoveUntil(
         SignInPage.routeName,
         (Route<dynamic> route) => false,

@@ -39,10 +39,10 @@ class _InventoryTileWidget extends StatelessWidget {
       contentPadding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 2.w),
       title: Text(inventory.name),
       subtitle: Text(inventory.desc),
-      trailing: IconButton(
+      trailing: ElevatedButton(
         onPressed: () =>
             context.read<HomeProvider>().deleteInventory(inventory),
-        icon: Icon(Icons.delete, size: 12.w),
+        child: const Text('Utilize'),
       ),
     );
   }
