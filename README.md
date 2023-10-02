@@ -7,9 +7,8 @@ A Simple Game inventory app where users can add/buy/use inventory items
 Flutter version : 3.13.1
 
 run app with command   : flutter run
-build fat/universal apk command : flutter build apk
 
-Architecture : MVVM [ Data models(M), View(V), Provider(VM) ]
+build fat/universal apk command : flutter build apk
 
 run unit test cases : flutter test
 
