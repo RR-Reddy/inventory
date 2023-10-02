@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:inventory/pages/sign_in/sign_in_page.dart';
 import 'package:inventory/service/index.dart';
 
+///
+/// Handles state of Google-sign
+///
 class AuthProvider extends ChangeNotifier {
   final AuthService authService;
   final NavService navService;

@@ -4,6 +4,9 @@ import 'package:inventory/models/inventory.dart';
 import 'package:inventory/providers/index.dart';
 import 'package:inventory/service/index.dart';
 
+///
+/// Handle state of home screen
+///
 class HomeProvider extends ChangeNotifier {
   final AuthProvider authProvider;
   final DataService dataService;

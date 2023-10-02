@@ -3,6 +3,9 @@ import 'package:inventory/providers/index.dart';
 import 'package:inventory/service/index.dart';
 import 'package:provider/provider.dart';
 
+///
+/// Wrapper widget for global level providers
+///
 class RootProvidersWidget extends StatelessWidget {
   const RootProvidersWidget({Key? key, this.child}) : super(key: key);
   final Widget? child;

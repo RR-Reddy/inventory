@@ -1,44 +1,68 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:inventory/utils/log_utils.dart';
 
+///
+/// [AuthService] provides google sign-in capabilities
+///
 class AuthService {
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+  late final GoogleSignIn googleSignIn;
+  late final FirebaseAuth firebaseAuth;
+
+  AuthService({GoogleSignIn? googleSignIn, FirebaseAuth? firebaseAuth}) {
+    this.googleSignIn = googleSignIn ?? GoogleSignIn();
+    this.firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  }
 
   Future<User?> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-    if (googleUser != null) {
-      // Obtain the auth details from the request
-      final googleAuth = await googleUser.authentication;
+      if (googleUser != null) {
+        // Obtain the auth details from the request
+        final googleAuth = await googleUser.authentication;
 
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+        // Create a new credential
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
 
-      // Once signed in
-      await FirebaseAuth.instance.signInWithCredential(credential);
+        // Once signed in
+        await firebaseAuth.signInWithCredential(credential);
+      }
+    } catch (e, st) {
+      LogUtils.logError(this, e, st);
+      return null;
     }
 
-    return FirebaseAuth.instance.currentUser;
+    return firebaseAuth.currentUser;
   }
 
   Future<bool> isSignedIn() async {
-    return FirebaseAuth.instance.currentUser != null;
+    return firebaseAuth.currentUser != null;
   }
 
   Future<void> signOut() async {
-    FirebaseAuth.instance.signOut();
-    googleSignIn.signOut();
+    try {
+      await firebaseAuth.signOut();
+      await googleSignIn.signOut();
+    } catch (e, st) {
+      LogUtils.logError(this, e, st);
+    }
   }
 
-  Future<void> signInSilently() async {
-    await googleSignIn.signInSilently();
+  Future<bool> signInSilently() async {
+    try {
+      return await googleSignIn.signInSilently() != null;
+    } catch (e, st) {
+      LogUtils.logError(this, e, st);
+    }
+    return false;
   }
 
   Stream<User?> authStateChanges() {
-    return FirebaseAuth.instance.authStateChanges();
+    return firebaseAuth.authStateChanges();
   }
 }

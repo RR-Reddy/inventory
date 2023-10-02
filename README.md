@@ -1,16 +1,19 @@
 # inventory
 
-A new Flutter project.
+A Simple Game inventory app where users can add/buy/use inventory items
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Flutter version : 3.13.1
 
-A few resources to get you started if this is your first Flutter project:
+run app with command   : flutter run
+build fat/universal apk command : flutter build apk
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Architecture : MVVM [ Data models(M), View(V), Provider(VM) ]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+run unit test cases : flutter test
+
+Note: Unit test cases were added for few service and provider classes. please have a look "test"
+      Folder for test cases
+
+

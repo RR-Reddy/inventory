@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
+///
+/// Handles Internet connectivity status.
+///
 class ConnectivityProvider extends ChangeNotifier {
   StreamSubscription? _subscription;
 

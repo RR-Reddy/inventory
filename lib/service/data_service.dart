@@ -2,8 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:inventory/models/inventory.dart';
 import 'package:inventory/utils/log_utils.dart';
 
+///
+/// [DataService] can be used for create/edit/delete data in [FirebaseFirestore]
+///
 class DataService {
-  final db = FirebaseFirestore.instance;
+  late final FirebaseFirestore db;
+
+  DataService({FirebaseFirestore? db}) {
+    this.db = db ?? FirebaseFirestore.instance;
+  }
 
   Future<bool> addInventory(Inventory inventory) async {
     try {

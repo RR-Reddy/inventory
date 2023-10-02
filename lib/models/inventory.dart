@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+///
+/// Data/Model class for inventory
+///
 class Inventory {
   final String name;
   final String desc;

@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory/pages/index.dart';
-import 'package:inventory/providers/index.dart';
 import 'package:inventory/providers/root_providers_widget.dart';
 import 'package:inventory/service/nav_service.dart';
 import 'package:provider/provider.dart';
