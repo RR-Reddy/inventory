@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:inventory/pages/home/home_page.dart';
 import 'package:inventory/pages/sign_in/sign_in_page.dart';
 import 'package:inventory/providers/index.dart';
+import 'package:inventory/service/index.dart';
 
 class SplashProvider extends ChangeNotifier {
   final AuthProvider authProvider;
-  final NavProvider navProvider;
+  final NavService navProvider;
   final HomeProvider homeProvider;
 
   SplashProvider({

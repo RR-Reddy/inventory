@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory/models/index.dart';
+import 'package:inventory/models/inventory.dart';
 import 'package:inventory/pages/index.dart';
 import 'package:inventory/providers/index.dart';
 import 'package:inventory/extensions/index.dart';
@@ -7,34 +7,33 @@ import 'package:inventory/service/index.dart';
 import 'package:inventory/utils/log_utils.dart';
 
 class AddEditInventoryProvider extends ChangeNotifier {
-  final NavProvider navProvider;
-  final Inventory? inventory;
+  final NavService navService;
   final AuthProvider authProvider;
   final HomeProvider homeProvider;
 
-  final DataService dataService = DataService();
+  final DataService dataService;
 
   final nameCtrl = TextEditingController(text: '');
   final descCtrl = TextEditingController(text: '');
 
   AddEditInventoryProvider({
-    required this.navProvider,
+    required this.navService,
     required this.authProvider,
     required this.homeProvider,
-    this.inventory,
+    required this.dataService,
   });
 
   void saveInventory() async {
-    navProvider.context.unfocus();
+    navService.context.unfocus();
 
     /// validate
     if (nameCtrl.text.isEmpty || descCtrl.text.isEmpty) {
-      navProvider.context.showErrorMsg('Data should not be empty');
+      navService.context.showErrorMsg('Data should not be empty');
       return;
     }
 
     final completer =
-        navProvider.navigatorKey.currentContext?.showLoadingDialog();
+        navService.navigatorKey.currentContext?.showLoadingDialog();
     try {
       final model = Inventory(
         name: nameCtrl.text,
@@ -48,11 +47,11 @@ class AddEditInventoryProvider extends ChangeNotifier {
       homeProvider.refreshData();
       completer?.complete(Future.value(true));
       await Future.delayed(Duration.zero);
-      navProvider.nav.popUntil(
+      navService.nav.popUntil(
           (Route<dynamic> route) => route.settings.name == HomePage.routeName);
     } catch (e, st) {
       LogUtils.logError('error', e, st);
-      navProvider.context.showErrorMsg(e.toString());
+      navService.context.showErrorMsg(e.toString());
     }
   }
 
@@ -60,11 +59,11 @@ class AddEditInventoryProvider extends ChangeNotifier {
 
   void close() async {
     if (descCtrl.text.isEmpty || nameCtrl.text.isEmpty) {
-      navProvider.nav.pop();
+      navService.nav.pop();
       return;
     }
 
-    final isSave = await navProvider.context.showAlertDialog(
+    final isSave = await navService.context.showAlertDialog(
       bodyText: 'Your changes have not been saved',
       pButtonText: 'Save',
       nButtonText: 'Discard',
@@ -72,7 +71,7 @@ class AddEditInventoryProvider extends ChangeNotifier {
 
     if (isSave != true) {
       /// discard
-      navProvider.nav.pop();
+      navService.nav.pop();
       return;
     }
     saveInventory();

@@ -3,6 +3,7 @@ import 'package:inventory/extensions/index.dart';
 import 'package:inventory/pages/add_edit_inventory/add_edit_inventory_provider.dart';
 import 'package:inventory/pages/add_edit_inventory/widgets/index.dart';
 import 'package:inventory/providers/index.dart';
+import 'package:inventory/service/index.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -15,7 +16,8 @@ class AddEditInventoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => AddEditInventoryProvider(
-        navProvider: context.read<NavProvider>(),
+        navService: context.read<NavService>(),
+        dataService: context.read<DataService>(),
         authProvider: context.read<AuthProvider>(),
         homeProvider: context.read<HomeProvider>(),
       ),

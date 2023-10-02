@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:inventory/models/index.dart';
+import 'package:inventory/models/inventory.dart';
 import 'package:inventory/utils/log_utils.dart';
 
 class DataService {

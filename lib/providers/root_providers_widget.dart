@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/providers/index.dart';
+import 'package:inventory/service/index.dart';
 import 'package:provider/provider.dart';
 
 class RootProvidersWidget extends StatelessWidget {
@@ -10,16 +11,20 @@ class RootProvidersWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => NavProvider()),
+        Provider(create: (_) => NavService()),
+        Provider(create: (_) => AuthService()),
+        Provider(create: (_) => DataService()),
         ChangeNotifierProvider(
           lazy: false,
           create: (context) => AuthProvider(
-            navProvider: context.read<NavProvider>(),
+            navService: context.read<NavService>(),
+            authService: context.read<AuthService>(),
           ),
         ),
         ChangeNotifierProvider(
           create: (context) => HomeProvider(
             authProvider: context.read<AuthProvider>(),
+            dataService: context.read<DataService>(),
           ),
         ),
       ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory/models/index.dart';
+import 'package:inventory/models/inventory.dart';
 import 'package:inventory/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';

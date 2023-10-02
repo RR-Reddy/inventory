@@ -3,8 +3,8 @@ import 'package:inventory/extensions/index.dart';
 import 'package:inventory/pages/home/widgets/index.dart';
 import 'package:inventory/pages/index.dart';
 import 'package:inventory/providers/index.dart';
+import 'package:inventory/service/index.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
             ? FloatingActionButton(
                 child: const Icon(Icons.add),
                 onPressed: () => context
-                    .read<NavProvider>()
+                    .read<NavService>()
                     .nav
                     .pushNamed(AddEditInventoryPage.routeName),
               )

@@ -31,25 +31,6 @@ class Inventory {
     );
   }
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Inventory &&
-          runtimeType == other.runtimeType &&
-          name == other.name &&
-          desc == other.desc &&
-          userId == other.userId &&
-          status == other.status &&
-          id == other.id;
-
-  @override
-  int get hashCode =>
-      name.hashCode ^
-      desc.hashCode ^
-      userId.hashCode ^
-      status.hashCode ^
-      id.hashCode;
-
   factory Inventory.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,

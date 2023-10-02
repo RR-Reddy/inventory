@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:inventory/models/index.dart';
+import 'package:inventory/models/inventory.dart';
 import 'package:inventory/providers/index.dart';
 import 'package:inventory/service/index.dart';
 
 class HomeProvider extends ChangeNotifier {
   final AuthProvider authProvider;
-  final DataService dataService = DataService();
+  final DataService dataService;
 
   int get selectedTabIndex => _selectedTabIndex;
   var _selectedTabIndex = 0;
@@ -31,7 +31,10 @@ class HomeProvider extends ChangeNotifier {
   List<Inventory> get buyFilteredList => _buyFilteredList;
   var _buyFilteredList = <Inventory>[];
 
-  HomeProvider({required this.authProvider}) {
+  HomeProvider({
+    required this.authProvider,
+    required this.dataService,
+  }) {
     searchInputCtrl.addListener(_filterInventoryData);
     searchInputCtrl.addListener(_filterBuyData);
   }

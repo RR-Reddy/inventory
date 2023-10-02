@@ -3,6 +3,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:inventory/pages/sign_in/sign_in_provider.dart';
 import 'package:inventory/providers/index.dart';
+import 'package:inventory/service/index.dart';
 import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
@@ -15,7 +16,7 @@ class SignInPage extends StatelessWidget {
       create: (_) =>
           SignInProvider(
               authProvider: context.read<AuthProvider>(),
-              navProvider: context.read<NavProvider>(),
+              navProvider: context.read<NavService>(),
               homeProvider: context.read<HomeProvider>(),
           ),
       child: Scaffold(

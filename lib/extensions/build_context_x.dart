@@ -2,36 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:inventory/providers/index.dart';
+import 'package:inventory/service/index.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 extension BuildContextX on BuildContext {
-  ThemeData get theme => Theme.of(rootContext);
-
-  TextTheme get textTheme => theme.textTheme;
-
-  BuildContext get rootContext =>
-      Navigator.of(this, rootNavigator: true).context;
-
-  //NavigatorState get rootNav => Navigator.of(this, rootNavigator: true);
-
-  Size get screenSize => MediaQuery.of(this).size;
-
-  double get h => screenSize.height;
-
-  double get w => screenSize.width;
-
-  TargetPlatform get currentPlatform => theme.platform;
-
-  bool get isAndroid => currentPlatform == TargetPlatform.android;
-
-  bool get isIOS => currentPlatform == TargetPlatform.iOS;
-
   bool get isConnected => read<ConnectivityProvider>().isConnected;
 
   bool get isNotConnected => !isConnected;
-
-  bool get isTablet => screenSize.shortestSide > 600;
 
   EdgeInsets get scrollPadding =>
       EdgeInsets.only(bottom: MediaQuery.of(this).viewInsets.bottom + 8.h);
@@ -39,7 +17,7 @@ extension BuildContextX on BuildContext {
   void unfocus() => FocusScope.of(this).unfocus();
 
   void showErrorMsg(String msg) {
-    ScaffoldMessenger.of(read<NavProvider>().navigatorKey.currentContext!)
+    ScaffoldMessenger.of(read<NavService>().navigatorKey.currentContext!)
         .showSnackBar(
       SnackBar(content: Text(msg)),
     );
@@ -49,7 +27,7 @@ extension BuildContextX on BuildContext {
     showAlertDialog(
       title: 'Network Error!',
       bodyText:
-      'Could be a network error. Please check your Data or WIFI connection and try again!',
+          'Could be a network error. Please check your Data or WIFI connection and try again!',
       isSingleAction: true,
       pButtonText: 'OK',
     );
@@ -93,7 +71,7 @@ extension BuildContextX on BuildContext {
         onWillPop: () async => barrierDismissible,
       ),
       actions:
-      isSingleAction ? [continueButton] : [cancelButton, continueButton],
+          isSingleAction ? [continueButton] : [cancelButton, continueButton],
     );
 
     // show the dialog
@@ -133,7 +111,7 @@ extension BuildContextX on BuildContext {
       },
     );
     final completer = Completer();
-    completer.future.then((value) => read<NavProvider>().nav.pop());
+    completer.future.then((value) => read<NavService>().nav.pop());
     return completer;
   }
 }

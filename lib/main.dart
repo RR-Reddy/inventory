@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory/pages/index.dart';
 import 'package:inventory/providers/index.dart';
 import 'package:inventory/providers/root_providers_widget.dart';
+import 'package:inventory/service/nav_service.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           ),
           home: const SplashPage(),
           onGenerateRoute: generateRoute,
-          navigatorKey: context.read<NavProvider>().navigatorKey,
+          navigatorKey: context.read<NavService>().navigatorKey,
         );
       }),
     );
